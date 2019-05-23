@@ -35,7 +35,7 @@ base_image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
 
 # Master configuration
 master_size: t2.medium
-master_count: 2
+master_count: 1
 master_volume_size: 50
 role: Bastion
 # Use master_max_price if you want to use spot instances.
