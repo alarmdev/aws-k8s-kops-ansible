@@ -5,4 +5,5 @@
 ####################
 
 - name: Delete the cluster
-  shell: "kops delete cluster {{ cluster_name }} --state {{ state_store }} --yes"
+  shell: "kops delete cluster --name=demo.k8s.local --yes --state s3://dev-k8s-demo"
+#kops delete cluster {{ cluster_name }} --state {{ state_store }} --yes"

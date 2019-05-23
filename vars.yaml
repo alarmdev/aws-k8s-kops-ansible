@@ -1,14 +1,11 @@
 ---
 
-# Cluster name
+# Cluster setup
 cluster_name: demo.k8s.local
-
-# State store
-state_store: s3://dev-k8s-demo
+state_store: dev-k8s-demo
 
 ## Remote access
 ssh_public_key: ~/.ssh/id_rsa.pub
-
 
 ## Regions / Availability zones
 aws_region: us-east-1
@@ -28,14 +25,11 @@ topology: private
 
 
 ## EC2 host sizing
-# https://github.com/kubernetes/kops/blob/master/docs/images.md
 base_image: kope.io/k8s-1.11-debian-stretch-amd64-hvm-ebs-2018-08-17
-#base_image: 072955634019/CentOS_7.5
-
 
 # Master configuration
 master_size: t2.medium
-master_count: 2
+master_count: 1
 master_volume_size: 50
 role: Bastion
 # Use master_max_price if you want to use spot instances.
@@ -46,7 +40,7 @@ role: Bastion
 
 # Node configuration
 node_size: t2.medium
-node_count: 3
+node_count: 2
 node_volume_size: 50
 # Use node_max_price if you want to use spot instances.
 # Useful to reduce cost during testing

@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Install Kubernetes Dashboard
+      command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v1.10.1/src/deploy/recommended/kubernetes-dashboard.yaml
+      register: cmd
+    - debug: var=cmd.stdout
+    - name: Install Kubernetes Influxdb
+      command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/influxdb/influxdb.yaml
+      register: cmd
+    - debug: var=cmd.stdout
+    - name: Install Kubernetes Heapster
+      command: kubectl apply -f https://raw.githubusercontent.com/kubernetes/heapster/master/deploy/kube-config/rbac/heapster-rbac.yaml
+      register: cmd
+    - debug: var=cmd.stdout
+    - name: Install Kubernetes Access
+      command: kubectl apply -f eks-admin-service-account.yaml
+      register: cmd
+    - debug: var=cmd.stdout
+    - name: test shell
+      shell: echo $(kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep eks-admin | awk '{print $1}'))
+      register: cmd
+    - debug: var=cmd.stdout
+    - name: Start kube proxy
+      shell: kubectl proxy &

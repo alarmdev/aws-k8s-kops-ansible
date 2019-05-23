@@ -5,6 +5,9 @@
 
 - hosts: localhost
   connection: local
+  environment:
+    KOPS_STATE_STORE: s3://dev-k8s-demo
+    cluster_name: demo.k8s.local
   tasks:
   - import_role: 
       name: lambda-delete
